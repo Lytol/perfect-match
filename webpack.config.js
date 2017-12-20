@@ -7,11 +7,18 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  module: {
+    rules: [
+      { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
+    ]
+  },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './dist'
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    })
   ]
 };
