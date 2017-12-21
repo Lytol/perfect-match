@@ -1,12 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+import App from './components/App';
+import './style.scss';
 
-export default class App extends Component {
-  render() {
-    return (
-      <h1>Perfect Match</h1>
-    );
-  }
-}
-
-render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById('root'));

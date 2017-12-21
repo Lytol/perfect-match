@@ -9,7 +9,19 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader" },
+          { loader: "sass-loader" }
+        ]
+      }
     ]
   },
   devtool: 'inline-source-map',
