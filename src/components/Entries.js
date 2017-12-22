@@ -11,8 +11,10 @@ class EntryInput extends React.Component {
   }
 
   onSubmit(event) {
-    this.props.onAdd(this.state.value);
-    this.setState({ value: "" });
+    if (this.isValid()) {
+      this.props.onAdd(this.state.value);
+      this.setState({ value: "" });
+    }
     event.preventDefault();
   }
 
@@ -20,6 +22,10 @@ class EntryInput extends React.Component {
     this.setState({
       value: event.target.value
     });
+  }
+
+  isValid() {
+    return !_.isEmpty(this.state.value);
   }
 
   render() {
