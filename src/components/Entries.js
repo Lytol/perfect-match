@@ -7,12 +7,13 @@ class EntryInput extends React.Component {
     super(props);
     this.state = { value: "" };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.addEntry = this.addEntry.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  addEntry() {
+  onSubmit(event) {
     this.props.onAdd(this.state.value);
     this.setState({ value: "" });
+    event.preventDefault();
   }
 
   handleInputChange(event) {
@@ -23,10 +24,10 @@ class EntryInput extends React.Component {
 
   render() {
     return (
-      <div className="entry-input">
+      <form className="entry-input" onSubmit={this.onSubmit}>
         <input type="text" value={this.state.value} onChange={this.handleInputChange}/>
-        <button onClick={this.addEntry}>Add</button>
-      </div>
+        <button>Add</button>
+      </form>
     );
   }
 }
