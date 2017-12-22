@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
-export class EntryInput extends React.Component {
+class EntryInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { value: "" };
@@ -23,8 +24,8 @@ export class EntryInput extends React.Component {
   render() {
     return (
       <div className="entry-input">
-        <input type="text" value={this.state.value} onChange={(e) => this.handleInputChange(e)}/>
-        <button onClick={() => this.addEntry()}>Add</button>
+        <input type="text" value={this.state.value} onChange={this.handleInputChange}/>
+        <button onClick={this.addEntry}>Add</button>
       </div>
     );
   }
@@ -34,41 +35,71 @@ EntryInput.propTypes = {
   onAdd: PropTypes.func.isRequired
 };
 
-export class EntryList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+function EntryList(props) {
+  const entries = props.entries;
+  const onRemove = props.onRemove;
 
-  render() {
-    const entries = this.props.entries;
-    const entryItems = entries.map((value) =>
-      <Entry key={value.toString()} value={value} />
-    );
+  const entryItems = entries.map((value) =>
+    <Entry key={value.toString()} value={value} onRemove={onRemove} />
+  );
 
-    return (
-      <ul className="entry-list">
-        {entryItems}
-      </ul>
-    );
-  }
+  return (
+    <ul className="entry-list">
+      {entryItems}
+    </ul>
+  );
 }
 
 EntryList.propTypes = {
-  entries: PropTypes.arrayOf(PropTypes.string).isRequired
+  entries: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onRemove: PropTypes.func.isRequired
 };
 
-class Entry extends React.Component {
+function Entry(props) {
+  const value = props.value;
+  const onRemove = props.onRemove;
+
+  return (
+    <li className="entry">
+      <div className="entry-value">{value}</div>
+      <i className="entry-remove material-icons" onClick={() => onRemove(value)}>remove_circle_outline</i>
+    </li>
+  );
+}
+
+Entry.propTypes = {
+  value: PropTypes.string.isRequired,
+  onRemove: PropTypes.func.isRequired
+};
+
+export default class Entries extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { entries: [] };
+    this.onAddEntry = this.onAddEntry.bind(this);
+    this.onRemoveEntry = this.onRemoveEntry.bind(this);
+  }
+
+  onAddEntry(value) {
+    this.setState((prevState) => ({
+      entries: [...prevState.entries, value]
+    }));
+  }
+
+  onRemoveEntry(value) {
+    this.setState((prevState) => ({
+      entries: _.filter(prevState.entries, (v) => v != value)
+    }));
+  }
+
   render() {
-    const value = this.props.value;
+    const entries = this.state.entries;
 
     return (
-      <div className="entry">
-        {value}
+      <div className="entries">
+        <EntryInput onAdd={this.onAddEntry} />
+        <EntryList entries={entries} onRemove={this.onRemoveEntry} />
       </div>
     );
   }
 }
-
-Entry.propTypes = {
-  value: PropTypes.string.isRequired
-};

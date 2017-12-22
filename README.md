@@ -7,9 +7,8 @@ Web app to randomly select matches (think: secret santa) from a group
 TODO
 ----
 
-- User can add entries
 - Enter should submit new entries
-- User can remove entries
+- Upon submitting new entry, focus should return to input
 - Validate invalid (blank) entries
 - User can enter matching rules
   - cannot match

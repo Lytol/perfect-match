@@ -1,14 +1,14 @@
 @import "~normalize.css";
 
 $color-primary: #1565C0;
-$color-accent: #FF3D00;
+$color-accent: #0091EA;
 $color-dark: #0D47A1;
 $color-text: #E3F2FD;
 $font-primary: 'Lato', sans-serif;
 $font-alternate: 'Josefin Sans', sans-serif;
 $spacer: 1rem;
 
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:600|Lato');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:600|Lato|Material+Icons');
 
 html, body {
   margin: 0;
@@ -57,6 +57,8 @@ button {
   padding: 0 $spacer;
 }
 
+.entries {}
+
 .entry-input {
   display: flex;
 
@@ -74,11 +76,22 @@ button {
 .entry-list {
   margin: $spacer*2 0;
   padding: 0;
+  list-style-type: none;
 }
 
 .entry {
+  display: flex;
   border-radius: 3px;
   background-color: $color-dark;
   margin: $spacer 0;
   padding: 5px $spacer;
+}
+
+.entry-value {
+  flex-grow: 1;
+}
+
+.entry-remove {
+  align-self: flex-end;
+  cursor: pointer;
 }
