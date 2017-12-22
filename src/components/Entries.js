@@ -46,15 +46,20 @@ function EntryList(props) {
   const entries = props.entries;
   const onRemove = props.onRemove;
 
-  const entryItems = entries.map((value) =>
-    <Entry key={value.toString()} value={value} onRemove={onRemove} />
-  );
-
-  return (
-    <ul className="entry-list">
-      {entryItems}
-    </ul>
-  );
+  if (_.isEmpty(entries)) {
+    return (
+      <ul className="entry-list">
+        <li className="empty">Add items above in order to create a perfect match</li>
+      </ul>
+    );
+  } else {
+    const entryItems = entries.map((value) => <Entry key={value.toString()} value={value} onRemove={onRemove} />);
+    return (
+      <ul className="entry-list">
+        {entryItems}
+      </ul>
+    );
+  }
 }
 
 EntryList.propTypes = {

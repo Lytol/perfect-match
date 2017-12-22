@@ -4,6 +4,7 @@ $color-primary: #1565C0;
 $color-accent: #0091EA;
 $color-dark: #0D47A1;
 $color-text: #E3F2FD;
+$color-text-secondary: #C3C3C3;
 $font-primary: 'Lato', sans-serif;
 $font-alternate: 'Josefin Sans', sans-serif;
 $spacer: 1rem;
@@ -77,6 +78,12 @@ button {
   margin: $spacer*2 0;
   padding: 0;
   list-style-type: none;
+
+  .empty {
+    color: $color-text-secondary;
+    text-align: center;
+    font-style: italic;
+  }
 }
 
 .entry {
